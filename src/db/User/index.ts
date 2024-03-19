@@ -14,7 +14,7 @@ const useSchema = new Schema<IUser>({
   telephone: { type: Number, required: true }
 });
 
-const useModel = model<IUser>("Users", useSchema);
+export const useModel = model<IUser>("Users", useSchema);
 
 export const getUsers = async() => useModel.find();
 export const getUserById = async(id: string) => useModel.findById(id);

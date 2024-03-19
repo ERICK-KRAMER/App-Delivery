@@ -14,7 +14,7 @@ const productSchema = new Schema<IProducts>({
   img: { type: String, required: true }
 });
 
-const useProduct = model<IProducts>("product", productSchema);
+export const useProduct = model<IProducts>("product", productSchema);
 
 export const getALlProducts = async() => useProduct.find();
 export const getProductById = async(id: string) => useProduct.findById(id);
