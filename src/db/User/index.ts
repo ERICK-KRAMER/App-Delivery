@@ -18,6 +18,7 @@ const useModel = model<IUser>("Users", useSchema);
 
 export const getUsers = async() => useModel.find();
 export const getUserById = async(id: string) => useModel.findById(id);
+export const getUserByEmail = async(email: string) => useModel.findOne({ email: email });
 export const createUser = async(values: IUser) => new useModel(values).save();
 export const updateUser = async(id: string, values: Record<string, any>) => useModel.findOneAndUpdate({ id }, values, { new: true });
 export const removeUser = async(id: string) => useModel.findByIdAndDelete({ _id: id });
