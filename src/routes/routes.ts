@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { Login } from "../controller/Login";
 import { GetUser, CreateUser, GetUserById, RemoveUser, UpdateProfileUser } from "../controller/User/index";
 import { CreateProduct, DeleteProduct, GetAllProducts, GetProductById, UpdateProduct } from "../controller/Products/index";
 
@@ -17,5 +18,8 @@ router.get('/products/:id', GetProductById);
 router.post('/products/create', CreateProduct);
 router.delete('/products/remove/:id', DeleteProduct);
 router.put('/products/update/:id', UpdateProduct);
+
+// Login Route 
+router.post('/login', Login);
 
 export default router;
