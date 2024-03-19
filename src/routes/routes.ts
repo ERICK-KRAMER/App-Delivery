@@ -6,16 +6,16 @@ const router = Router();
 
 // Rotas de Usuário
 router.get('/users', GetUser);
-router.post('/users', CreateUser);
 router.get('/users/:id', GetUserById);
-router.delete('/users/:id', RemoveUser);
-router.put('/users/:id', UpdateProfileUser);
+router.post('/users/create', CreateUser);
+router.delete('/users/remove/:id', RemoveUser);
+router.put('/users/update/:id', UpdateProfileUser);
 
 // Rotas de Produtos
 router.get('/products', GetAllProducts);
-router.post('/products', CreateProduct);
 router.get('/products/:id', GetProductById);
-router.delete('/products/:id', DeleteProduct);
-router.put('/products/:id', UpdateProduct);
+router.post('/products/create', CreateProduct);
+router.delete('/products/remove/:id', DeleteProduct);
+router.put('/products/update/:id', UpdateProduct);
 
 export default router;
