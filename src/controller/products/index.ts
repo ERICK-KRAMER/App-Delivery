@@ -20,7 +20,7 @@ export const GetAllProducts = async(req:Request, res: Response) => {
   try {
     const response = await getALlProducts();
     if(!response) return  res.status(404).send({ message:"No se encontraron productos"});
-    res.status(200).send(response);
+    return res.status(200).send(response);
   } catch (error) {
     throw new Error(`Algo deu errado , ${ error }`)
   }
@@ -31,7 +31,7 @@ export const CreateProduct = (req: Request, res: Response) => {
     const values = CreateProductSchema.parse(req.body);
     const response = createNewProduct({ ...values }) ;
     if(!response)  return res.status(500).send("Erro ao criar o produto");
-    res.status(201).send(response);
+    return res.status(201).send(response);
   } catch (error) {
     throw new Error(`Algo deu errado, ${ error }`)
   }
@@ -42,7 +42,7 @@ export const GetProductById = async(req: Request, res: Response) => {
     const { id } = req.params;
     const response = await getProductById(id);
     if(!response) return  res.status(404).send({ status: "fail" , msg: "Nao foi possivel localizar o produto" });
-    res.status(200).send({ status: "success", data: response });
+    return res.status(200).send({ status: "success", data: response });
   } catch (error) {
     throw new Error(`Algo de errdo aconteceu,  ${ error }`)
   }
@@ -54,7 +54,7 @@ export const UpdateProduct = async (req: Request, res: Response) => {
     const update = UpdateProductSchema.parse(req.body);
     const response = await updateProduct(id, { ...update });
     if(!response) return  res.status(404).send({ status: "fail", msg: "Nao foi possivel alterar o produto" });
-    res.status(200).send({ status: "success", data: `O item foi atualizado ${ response }` })
+    return res.status(200).send({ status: "success", data: `O item foi atualizado ${ response }` })
   } catch (error) {
     throw new Error(`Algo de errado aconteceu, ${ error }`)
   }
@@ -65,7 +65,7 @@ export const  DeleteProduct = async (req: Request, res :Response ) => {
     const { id } = req.params;
     const response = await removeProduct(id);
     if(!response) return res.status(400).json({ status:"fail", msg:"Produto não encontrado"});
-    res.status(200).send({ status: "success", data: `O item foi removido ${ response }` })
+    return res.status(200).send({ status: "success", data: `O item foi removido ${ response }` })
   } catch (error) {
     throw new Error(`Algo de errado aconteceu, ${ error }`)
   }
