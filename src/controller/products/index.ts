@@ -1,5 +1,5 @@
 import { Response, Request } from "express";
-import { createNewProduct, getALlProducts, getProductById, removeProduct, updateProduct } from "../../db/products";
+import { createNewProduct, getALlProducts, getProductById, removeProduct, updateProduct } from "../../db/Products";
 import { z } from "zod";
 
 const CreateProductSchema = z.object({

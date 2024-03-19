@@ -1,5 +1,7 @@
 import { Router } from "express";
 import { Login } from "../controller/Login";
+// import { SendSMS } from "../SendSMS/index";
+// import twilio from "twilio";
 import { GetUser, CreateUser, GetUserById, RemoveUser, UpdateProfileUser } from "../controller/User/index";
 import { CreateProduct, DeleteProduct, GetAllProducts, GetProductById, UpdateProduct } from "../controller/Products/index";
 
@@ -21,5 +23,8 @@ router.put('/products/update/:id', UpdateProduct);
 
 // Login Route 
 router.post('/login', Login);
+
+// SMS Route 
+// router.post("/message",twilio.webhook({ validate: true }), SendSMS);
 
 export default router;
