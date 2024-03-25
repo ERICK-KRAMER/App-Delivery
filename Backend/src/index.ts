@@ -3,7 +3,6 @@ import { config } from "dotenv";
 import { connect } from "mongoose";
 import http from "http";
 import cors from "cors";
-import { Options } from "./config/cors";
 import routes from "./routes/routes";
 
 // Carregar variáveis de ambiente
@@ -15,7 +14,7 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors(Options));
+app.use(cors());
 app.use(routes);
 
 // Criar o servidor HTTP

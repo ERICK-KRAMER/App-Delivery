@@ -1,13 +1,15 @@
 import { model, Schema } from "mongoose"
 
 interface IProducts {
+  type: String,
   name: String,
   description?: String,
   price: Number,
-  img?: string
+  img?: String
 }
 
 const productSchema = new Schema<IProducts>({
+  type: { type: String, required: true },
   name: {  type: String, required: true },
   description: { type: String },
   price: { type: Number, required: true },

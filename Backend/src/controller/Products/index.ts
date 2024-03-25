@@ -7,13 +7,15 @@ const CreateProductSchema = z.object({
   price: z.number(),
   description: z.string().optional(),
   img: z.string().url().optional(),
+  type: z.string()
 });
 
 const UpdateProductSchema = z.object({
   name: z.string().min(3),
   price: z.number(),
   description: z.string().optional(),
-  img: z.string().url().optional()
+  img: z.string().url().optional(),
+  type: z.string()
 });
 
 export const GetAllProducts = async(req:Request, res: Response) => {
