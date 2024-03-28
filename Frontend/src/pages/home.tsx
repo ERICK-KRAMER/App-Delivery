@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../api/products";
 import { LoadingCircle } from "../components/loading";
 import { IProducts } from "../types/Products";
+import FooterComponent from "../components/footer/footer"
 import ItemComponent from "../components/items/itemCompoenet1";
 import Complements from "../components/complements";
 import ItemComponent2 from "../components/items/itemComponent2";
@@ -40,8 +41,9 @@ export default function Home() {
   return (
     <>
       <TopBar/>
+
       <Header/>
-      <Toolbar/>
+
       <Search filterItemsData={filterItemsData} itemNomeRef={itemNameRef} />
       
       {filterItems.length > 0 ? (
@@ -71,6 +73,10 @@ export default function Home() {
           </Complements>
         </>
       )}
+      
+      <FooterComponent/>
+
+      <Toolbar/>
     </>
   );
 }
