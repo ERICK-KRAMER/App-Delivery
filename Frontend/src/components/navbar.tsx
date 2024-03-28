@@ -1,16 +1,20 @@
 import { ShoppingCart } from "lucide-react";
 
-const NavBar = () => {
+interface Props{
+  handleSearchItem: () => void
+}
+
+const NavBar = ({ handleSearchItem }:Props) => {
   return(
     <div className="w-screen flex justify-center items-center">
       <div className=" h-[70px] w-[800px] border border-zinc-200 flex items-center px-7 rounded-lg shadow-sm 2xl:w-4/5 justify-center xl:w-4/5 lg:w-4/5 md:w-4/5 sm:w-4/5">
         <nav className="flex justify-between w-full">
           <ul className=" flex gap-4 ">
-            <li className="hover:underline hover:text-yellow-500 cursor-pointer">Hambúrgueres</li>
-            <li className="hover:underline hover:text-yellow-500 cursor-pointer">Pizzas</li>
-            <li className="hover:underline hover:text-yellow-500 cursor-pointer">Complementos</li>
-            <li className="hover:underline hover:text-yellow-500 cursor-pointer">Sobrimesas</li>
-            <li className="hover:underline hover:text-yellow-500 cursor-pointer">Bebidas</li>
+            <li className="hover:underline hover:text-yellow-500 cursor-pointer" onClick={(e)=>handleSearchItem(e.target.value)}>Hambúrgueres</li>
+            <li className="hover:underline hover:text-yellow-500 cursor-pointer" onClick={(e)=>handleSearchItem(e.target.value)}>Pizzas</li>
+            <li className="hover:underline hover:text-yellow-500 cursor-pointer" onClick={(e)=>handleSearchItem(e.target.value)}>Complementos</li>
+            <li className="hover:underline hover:text-yellow-500 cursor-pointer" onClick={(e)=>handleSearchItem(e.target.value)}>Sobrimesas</li>
+            <li className="hover:underline hover:text-yellow-500 cursor-pointer" onClick={(e)=>handleSearchItem(e.target.value)}>Bebidas</li>
           </ul>
           <div className="flex">
           </div>

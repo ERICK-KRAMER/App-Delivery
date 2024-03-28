@@ -34,11 +34,19 @@ const FooterComponent = () => {
         </div>
       </div>
       <div className="grid grid-flow-col place-items-center   py-2 ">
-        <div>
-          <h3>Rede sociais</h3>
-          <FaFacebookF/>
-          <FaWhatsapp/>
-          <FaInstagram/>
+        <div className="flex justify-center items-center flex-col">
+          <h3 className="text-xl font-medium">Rede sociais</h3>
+          <div className="flex justify-start ">
+            <div className="p-2 flex justify-center items-center bg-slate-600 rounded-md m-1 hover:bg-white hover:text-blue-500 transition duration-500">
+              <FaFacebookF className="w-12 h-12"/>
+            </div>
+            <div className="p-2 flex justify-center items-center bg-slate-600 rounded-md m-1 hover:bg-white hover:text-green-500 transition duration-500">
+              <FaWhatsapp className="w-12 h-12"/>
+            </div>
+            <div className="p-2 flex justify-center items-center bg-slate-600 rounded-md m-1 hover:bg-white hover:text-violet-500 transition duration-500">
+              <FaInstagram className="w-12 h-12"/>
+            </div>
+          </div>
         </div>
         <div className=" bg-white text-black p-4 rounded-md w-[420px]">
           <h3 className="text-center font-bold text-2xl">Horario de Funcionamento</h3>

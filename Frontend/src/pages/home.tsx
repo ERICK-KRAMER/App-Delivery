@@ -38,11 +38,15 @@ export default function Home() {
     }
   };
 
+  const handleSearchItem = () => {
+    console.log("clicou")
+  }
+
   return (
     <>
       <TopBar/>
 
-      <Header/>
+      <Header handleSearchItem={ handleSearchItem }/>
 
       <Search filterItemsData={filterItemsData} itemNomeRef={itemNameRef} />
       
