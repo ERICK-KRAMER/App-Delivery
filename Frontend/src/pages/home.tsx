@@ -2,13 +2,13 @@ import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../api/products";
 import { LoadingCircle } from "../components/loading";
 import { IProducts, ProductsPops } from "../types/Products";
-import FooterComponent from "../components/footer/footer"
+import FooterComponent from "../components/footer/footer";
 import ItemComponent from "../components/items/itemCompoenet1";
 import Complements from "../components/complements";
 import ItemComponent2 from "../components/items/itemComponent2";
 import SaleComponent from "../components/sale";
 import Search from "../components/search";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import TopBar from "../components/topbar";
 import Header from "../components/header";
 import Toolbar from "../components/toolbar";
@@ -21,6 +21,20 @@ export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
   const [targetItem, setTargetItem] = useState<ProductsPops | undefined>();
   const { data, error, isLoading } = useQuery<IProducts>({ queryKey: ['products'], queryFn: getProducts });
+  const [showToolbar, setShowToolbar] = useState<boolean>(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setShowToolbar(window.innerWidth < 800);
+    };
+
+    handleResize(); // Chamada inicial para definir o estado
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   if (isLoading) return <div className="flex justify-center items-center h-screen"><LoadingCircle/></div>;
   if (error) return <div className="flex justify-center items-center h-screen">Error! { error.message }</div>;
@@ -52,6 +66,9 @@ export default function Home() {
             
       {isOpen && targetItem && <ModalComponent isOpen={isOpen} setIsOpen={setIsOpen} children={<Item values={targetItem} />} />}
 
+      {showToolbar && (
+        <Toolbar />
+      )}
       
       {filterItems.length > 0 ? (
         <Complements title={"Filtrados"}>
@@ -82,8 +99,6 @@ export default function Home() {
       )}
 
       <FooterComponent/>
-
-      <Toolbar/>
     </>
   );
 }

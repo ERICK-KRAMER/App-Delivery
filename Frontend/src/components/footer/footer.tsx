@@ -2,7 +2,7 @@ import { FaFacebookF, FaWhatsapp, FaInstagram } from "react-icons/fa";
 
 const FooterComponent = () => {
   return(
-    <footer className="bg-slate-800 p-8 text-white mb-14">
+    <footer className="bg-slate-800 p-8 text-white max-[800px]:mb-14">
       <div className="grid grid-cols-3 gap-4 mb-6">
         <div className="flex flex-col items-center">
           <img src="" alt="name" />
