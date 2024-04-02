@@ -33,7 +33,7 @@ const FooterComponent = () => {
           </ul>
         </div>
       </div>
-      <div className="grid grid-flow-col place-items-center   py-2 ">
+      <div className="grid grid-flow-col place-items-center py-2 max-[800px]:grid-flow-row gap-5">
         <div className="flex justify-center items-center flex-col">
           <h3 className="text-xl font-medium">Rede sociais</h3>
           <div className="flex justify-start ">
