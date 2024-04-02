@@ -1,11 +1,17 @@
-import { IPropsProduct } from "../../types/Products";
+import React from "react";
+import { IPropsProduct, ProductsPops } from "../../types/Products";
 import ButtonCartComponent from "../ButtonCart";
 
-const ItemComponent = ({ values }: IPropsProduct) => {
+interface Props extends IPropsProduct {
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+  setTargetItem: React.Dispatch<React.SetStateAction<ProductsPops | undefined>>
+}
+
+const ItemComponent = ({ values, setIsOpen, setTargetItem }:Props) => {
 
   return (
     <>
-      <div className=" w-52 rounded-md border border-zinc-200 cursor-pointer h-80">
+      <div className=" w-52 rounded-md border border-zinc-200 cursor-pointer h-80" onClick={() => { setIsOpen(true); setTargetItem({...values,_id: "unique_id"}) }}>
           <img src={ values.img } alt={ values.name } className="h-40 w-full rounded-t-md" />
         <div className="flex justify-center items-center flex-col p-4">
           <h2 className=" hover:text-red-500 transition duration-400 font-medium text-center">{ values.name }</h2>

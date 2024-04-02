@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../api/products";
 import { LoadingCircle } from "../components/loading";
-import { IProducts } from "../types/Products";
+import { IProducts, ProductsPops } from "../types/Products";
 import FooterComponent from "../components/footer/footer"
 import ItemComponent from "../components/items/itemCompoenet1";
 import Complements from "../components/complements";
@@ -12,10 +12,14 @@ import { useRef, useState } from "react";
 import TopBar from "../components/topbar";
 import Header from "../components/header";
 import Toolbar from "../components/toolbar";
+import ModalComponent from "../components/modal/modal";
+import Item from "../components/modal/item";
 
 export default function Home() {
   const itemNameRef = useRef<HTMLInputElement>(null);
   const [filterItems, setFilterItems] = useState<IProducts>([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [targetItem, setTargetItem] = useState<ProductsPops | undefined>();
   const { data, error, isLoading } = useQuery<IProducts>({ queryKey: ['products'], queryFn: getProducts });
 
   if (isLoading) return <div className="flex justify-center items-center h-screen"><LoadingCircle/></div>;
@@ -49,6 +53,9 @@ export default function Home() {
       <Header handleSearchItem={ handleSearchItem }/>
 
       <Search filterItemsData={filterItemsData} itemNomeRef={itemNameRef} />
+            
+      {isOpen && targetItem && <ModalComponent isOpen={isOpen} setIsOpen={setIsOpen} children={<Item values={targetItem} />} />}
+
       
       {filterItems.length > 0 ? (
         <Complements title={"Filtrados"}>
@@ -57,7 +64,7 @@ export default function Home() {
       ) : (
         <>
           <SaleComponent>
-            {data && data.map(values => <ItemComponent values={values} key={values._id} />)}
+            {data && data.map(values => <ItemComponent values={values} key={values._id} setIsOpen={setIsOpen} setTargetItem={setTargetItem}/>)}
           </SaleComponent>
 
           <Complements title={"Hambúrgeres"} description={"Os melhores hambúrgueres de Recife"}>
@@ -77,7 +84,7 @@ export default function Home() {
           </Complements>
         </>
       )}
-      
+
       <FooterComponent/>
 
       <Toolbar/>
