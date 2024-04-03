@@ -24,7 +24,7 @@ export default function Home() {
   const [targetItem, setTargetItem] = useState<ProductsPops | undefined>();
   const { data, error, isLoading } = useQuery<IProducts>({ queryKey: ['products'], queryFn: getProducts });
   const [showToolbar, setShowToolbar] = useState<boolean>(false);
-  const token = useContext(UserContext);
+  const userLogin = useContext(UserContext);
 
   useEffect(() => {
     const handleResize = () => {
@@ -61,7 +61,9 @@ export default function Home() {
 
   return (
     <>
-    
+
+      <button onClick={()=> console.log(userLogin?.email)}> teste </button>
+
       <TopBar/>
 
       <Header/>

@@ -5,26 +5,32 @@ import FormComponent from "./pages/Login";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Login } from "./api/auth";
 import NotFoundPage from "./pages/notFoundPage";
+import { IUser } from "./types/User";
 
 export default function App() {
-  const [token, setToken] = useState<string | null>(null);
+  const [loginUser, setLoginUser] = useState<IUser | null>(null);
 
-  const handleClick = ({ email, password }: { email: string; password: string }) => {
-    Login({ email, password })
-      .then(res => {
-        setToken(res);
-        console.log(res);
-        if(res !== null) window.location.href = "/";
-      })
-      .catch(e => console.log(e));
+  const handleSubmit = async ({ email, password }: { email: string; password: string }) => {
+    try {
+      const userData = await Login({ email, password });
+      if (userData !== null) {
+        setLoginUser(userData);
+        if(loginUser !== null){
+          console.log(loginUser);
+          window.location.href= "/";
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
     <BrowserRouter>  
-      <UserContext.Provider value={token}>
+      <UserContext.Provider value={loginUser}>
         <Routes>
-          <Route path="/" element={<Home/>} />
-          <Route path="/login" element={<FormComponent handleClick={handleClick}/>} />
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<FormComponent handleSubmit={handleSubmit} />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </UserContext.Provider>

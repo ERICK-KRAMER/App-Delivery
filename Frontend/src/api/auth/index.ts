@@ -1,3 +1,5 @@
+import { IUser } from "../../types/User";
+
 const endpoint = "http://localhost:4000/login";
 
 interface IAuth {
@@ -5,7 +7,7 @@ interface IAuth {
   password: string;
 }
 
-export const Login = async ({ email, password }: IAuth): Promise<string | null> => {
+export const Login = async ({ email, password }: IAuth): Promise<IUser | null> => {
   try {
     const response = await fetch(endpoint, {
       method: 'POST',
@@ -21,8 +23,8 @@ export const Login = async ({ email, password }: IAuth): Promise<string | null> 
     const token = data.token;
 
     localStorage.setItem("token", token);
-
-    return token;
+    
+    return data; 
   } catch (error) {
     console.error('Erro ao fazer login:', error);
     return null;

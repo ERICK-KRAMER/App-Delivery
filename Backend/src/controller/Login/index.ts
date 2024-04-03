@@ -31,7 +31,7 @@ export const Login = async (req: Request, res: Response) => {
     const token = generateToken({ payload: Payload, chaveSecreta: id, expiresIn: Time });
 
     // Retorna o token
-    res.json({ token });
+    res.json({ token: token, name: name, id: id, email: email });
     
   } catch (error) {
     console.error("Erro ao fazer login:", error);

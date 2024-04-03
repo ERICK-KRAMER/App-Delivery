@@ -1,13 +1,12 @@
 import { createContext } from "react";
 
-interface UserContextType {
-  token: string | null;
+export interface IUsuarioLogadoContextData {
+  token: string
+  name: string
+  id: string
+  email: string
 }
 
-const defaultValue: UserContextType = {
-  token: null,
-};
-
-const UserContext = createContext<UserContextType>(defaultValue as UserContextType);
+const UserContext = createContext<IUsuarioLogadoContextData | null>(null);
 
 export default UserContext;
