@@ -8,27 +8,30 @@ import Complements from "../components/complements";
 import ItemComponent2 from "../components/items/itemComponent2";
 import SaleComponent from "../components/sale";
 import Search from "../components/search";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useContext } from "react";
 import TopBar from "../components/topbar";
 import Header from "../components/header";
 import Toolbar from "../components/toolbar";
 import ModalComponent from "../components/modal/modal";
 import Item from "../components/modal/item";
+import UserContext from "../context";
 
 export default function Home() {
+  
   const itemNameRef = useRef<HTMLInputElement>(null);
   const [filterItems, setFilterItems] = useState<IProducts>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [targetItem, setTargetItem] = useState<ProductsPops | undefined>();
   const { data, error, isLoading } = useQuery<IProducts>({ queryKey: ['products'], queryFn: getProducts });
   const [showToolbar, setShowToolbar] = useState<boolean>(false);
+  const token = useContext(UserContext);
 
   useEffect(() => {
     const handleResize = () => {
       setShowToolbar(window.innerWidth < 800);
     };
 
-    handleResize(); // Chamada inicial para definir o estado
+    handleResize();
     window.addEventListener('resize', handleResize);
 
     return () => {
@@ -58,6 +61,7 @@ export default function Home() {
 
   return (
     <>
+    
       <TopBar/>
 
       <Header/>

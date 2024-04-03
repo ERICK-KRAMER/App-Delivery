@@ -1,5 +1,6 @@
 import { User } from "lucide-react";
 import { FaFacebookF, FaWhatsapp } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const TopBar = () => {
   return (
@@ -15,10 +16,10 @@ const TopBar = () => {
             <span>Whatsapp</span>
           </li>
         </ul>
-        <li className=" flex justify-center items-center  cursor-pointer gap-1">
+        <Link to={"/login"} className=" flex justify-center items-center cursor-pointer gap-1">
           <User/>
           <span>Entrar</span>
-        </li>
+        </Link>
       </nav>
     </div>
   )
