@@ -72,7 +72,7 @@ export default function Home() {
       
       {filterItems.length > 0 ? (
         <Complements title={"Filtrados"}>
-          {filterItems.map(values => <ItemComponent2 values={values} key={values._id} />)}
+          {filterItems.map(values => <ItemComponent2 values={values} key={values._id} setIsOpen={setIsOpen} setTargetItem={setTargetItem} />)}
         </Complements>
       ) : (
         <>
@@ -81,19 +81,19 @@ export default function Home() {
           </SaleComponent>
 
           <Complements title={"Hambúrgeres"} description={"Os melhores hambúrgueres de Recife"}>
-            {data && hamburgueres.map(values => <ItemComponent2 values={values} key={values._id} />)}
+            {data && hamburgueres.map(values => <ItemComponent2 values={values} key={values._id}setIsOpen={setIsOpen} setTargetItem={setTargetItem} />)}
           </Complements>
 
           <Complements title={"Complementos"} description={"Acompanhamentos para ninguém botar defeito!"}>
-            {data && complementos.map(values => <ItemComponent2 values={values} key={values._id} />)}
+            {data && complementos.map(values => <ItemComponent2 values={values} key={values._id} setIsOpen={setIsOpen} setTargetItem={setTargetItem}/>)}
           </Complements>
 
           <Complements title={"Sobremesas"}>
-            {data && sobremesa.map(values => <ItemComponent2 values={values} key={values._id} />)}
+            {data && sobremesa.map(values => <ItemComponent2 values={values} key={values._id} setIsOpen={setIsOpen} setTargetItem={setTargetItem}/>)}
           </Complements>
 
           <Complements title={"Bebidas"}>
-            {data && bebidas.map(values => <ItemComponent2 values={values} key={values._id} />)}
+            {data && bebidas.map(values => <ItemComponent2 values={values} key={values._id} setIsOpen={setIsOpen} setTargetItem={setTargetItem}/>)}
           </Complements>
         </>
       )}
