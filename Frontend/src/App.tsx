@@ -1,39 +1,41 @@
-import { useState } from "react";
-import UserContext from "./context";
+import { useState, useEffect } from "react";
 import Home from "./pages/home";
 import FormComponent from "./pages/Login";
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Login } from "./api/auth";
 import NotFoundPage from "./pages/notFoundPage";
-import { IUser } from "./types/User";
+import { loginContext } from "./context/userLogin";
+import { IDataLogin } from "./types/User";
 
 export default function App() {
-  const [loginUser, setLoginUser] = useState<IUser | null>(null);
+  const [data, setData] = useState<IDataLogin>();
 
-  const handleSubmit = async ({ email, password }: { email: string; password: string }) => {
+  useEffect(() => {
+    const loginDataString = sessionStorage.getItem("login");
+    if (loginDataString) {
+      const loginData: IDataLogin = JSON.parse(loginDataString);
+      setData(loginData);
+    }
+  }, []);
+
+  const handleSubmit = async({ email, password }: { email: string, password: string }) => {
     try {
-      const userData = await Login({ email, password });
-      if (userData !== null) {
-        setLoginUser(userData);
-        if(loginUser !== null){
-          console.log(loginUser);
-          window.location.href= "/";
-        }
-      }
+      await Login({ email, password });
+      window.location.href = "/"
     } catch (error) {
       console.log(error);
     }
   }
 
   return (
-    <BrowserRouter>  
-      <UserContext.Provider value={loginUser}>
+    <BrowserRouter>
+      <loginContext.Provider value={{ data }}>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<FormComponent handleSubmit={handleSubmit} />} />
+          <Route path="/" element={<Home /> } />
+          <Route path="/login" element={data?.token ? <Navigate to={"/"}/> : <FormComponent handleSubmit={handleSubmit} />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
-      </UserContext.Provider>
+      </loginContext.Provider>
     </BrowserRouter>
   )
 }

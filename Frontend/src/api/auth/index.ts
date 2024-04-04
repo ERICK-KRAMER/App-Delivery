@@ -20,9 +20,9 @@ export const Login = async ({ email, password }: IAuth): Promise<IUser | null> =
     }
 
     const data = await response.json();
-    const token = data.token;
+    const dataString = JSON.stringify(data);
 
-    localStorage.setItem("token", token);
+    sessionStorage.setItem("login", dataString);
     
     return data; 
   } catch (error) {
@@ -30,3 +30,4 @@ export const Login = async ({ email, password }: IAuth): Promise<IUser | null> =
     return null;
   }
 };
+

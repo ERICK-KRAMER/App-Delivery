@@ -1,15 +1,8 @@
 import { createContext } from "react";
+import { IDataLogin } from "../types/User";
 
-interface IUsuarioLogadoContextData {
-  token: string;
+interface ILoginContext {
+  data: IDataLogin | undefined;
 }
 
-export const UserLoginContext = createContext<IUsuarioLogadoContextData>({} as IUsuarioLogadoContextData);
-
-export const UsuarioLoginProvider = ({ children }: { children: React.ReactNode }) => {
-  return(
-    <UserLoginContext.Provider value={{token: "erick"}}>
-      {children}
-    </UserLoginContext.Provider>
-  )
-}
+export const loginContext = createContext<ILoginContext>({ data: undefined });

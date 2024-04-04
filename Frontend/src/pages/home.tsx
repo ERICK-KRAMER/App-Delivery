@@ -8,13 +8,12 @@ import Complements from "../components/complements";
 import ItemComponent2 from "../components/items/itemComponent2";
 import SaleComponent from "../components/sale";
 import Search from "../components/search";
-import { useRef, useState, useEffect, useContext } from "react";
+import { useRef, useState, useEffect } from "react";
 import TopBar from "../components/topbar";
 import Header from "../components/header";
 import Toolbar from "../components/toolbar";
 import ModalComponent from "../components/modal/modal";
 import Item from "../components/modal/item";
-import UserContext from "../context";
 
 export default function Home() {
   
@@ -24,7 +23,6 @@ export default function Home() {
   const [targetItem, setTargetItem] = useState<ProductsPops | undefined>();
   const { data, error, isLoading } = useQuery<IProducts>({ queryKey: ['products'], queryFn: getProducts });
   const [showToolbar, setShowToolbar] = useState<boolean>(false);
-  const userLogin = useContext(UserContext);
 
   useEffect(() => {
     const handleResize = () => {
@@ -61,8 +59,6 @@ export default function Home() {
 
   return (
     <>
-
-      <button onClick={()=> console.log(userLogin?.email)}> teste </button>
 
       <TopBar/>
 

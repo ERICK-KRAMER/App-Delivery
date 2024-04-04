@@ -1,4 +1,4 @@
-export interface IUser {
+export interface IDataLogin {
   token: string
   name: string
   id: string
