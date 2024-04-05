@@ -10,10 +10,15 @@ import SaleComponent from "../components/sale";
 import Search from "../components/search";
 import { useRef, useState, useEffect } from "react";
 import TopBar from "../components/topbar";
-import Header from "../components/header";
 import Toolbar from "../components/toolbar";
 import ModalComponent from "../components/modal/modal";
 import Item from "../components/modal/item";
+import { HeaderComponent } from "../components/Header/headerComponent";
+import { ImageComponent } from "../components/Header/ImageComponent";
+import { NavigationComponent } from "../components/Header/NavigationComponent";
+import { NavComponent } from "../components/Header/NavComponent.";
+import { ShoppingCartComponent } from "../components/Header/ShopCartComponent";
+import { OptionComponent } from "../components/Header/optionComponent";
 
 export default function Home() {
   
@@ -57,20 +62,36 @@ export default function Home() {
     }
   };
 
+
+  const dataLogo = {
+    name: "LogoImage",
+    url: "https://painel.zeppy.com.br/storage/1/shops/1/34fa7815-logo-burguer.png"
+  }
+
   return (
     <>
 
       <TopBar/>
 
-      <Header/>
+      <HeaderComponent>
+        <ImageComponent dataLogo={dataLogo}/>
+        <NavigationComponent >
+          <NavComponent>
+            <OptionComponent text={"hamburger"}/>
+            <OptionComponent text={"Pizzas"}/>
+            <OptionComponent text={"Complementos"}/>
+            <OptionComponent text={"Sobrimesas"}/>
+            <OptionComponent text={"Bebidas"}/>
+          </NavComponent>
+          <ShoppingCartComponent/>
+        </NavigationComponent>
+      </HeaderComponent>
 
       <Search filterItemsData={filterItemsData} itemNomeRef={itemNameRef} />
             
       {isOpen && targetItem && <ModalComponent isOpen={isOpen} setIsOpen={setIsOpen} children={<Item values={targetItem} />} />}
 
-      {showToolbar && (
-        <Toolbar />
-      )}
+      {showToolbar && ( <Toolbar /> )}
       
       {filterItems.length > 0 ? (
         <Complements title={"Filtrados"}>
