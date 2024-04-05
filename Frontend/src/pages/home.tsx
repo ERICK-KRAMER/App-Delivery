@@ -13,12 +13,7 @@ import TopBar from "../components/topbar";
 import Toolbar from "../components/toolbar";
 import ModalComponent from "../components/modal/modal";
 import Item from "../components/modal/item";
-import { HeaderComponent } from "../components/Header/headerComponent";
-import { ImageComponent } from "../components/Header/ImageComponent";
-import { NavigationComponent } from "../components/Header/NavigationComponent";
-import { NavComponent } from "../components/Header/NavComponent.";
-import { ShoppingCartComponent } from "../components/Header/ShopCartComponent";
-import { OptionComponent } from "../components/Header/optionComponent";
+import { Header } from "../components/Header";
 
 export default function Home() {
   
@@ -73,19 +68,19 @@ export default function Home() {
 
       <TopBar/>
 
-      <HeaderComponent>
-        <ImageComponent dataLogo={dataLogo}/>
-        <NavigationComponent >
-          <NavComponent>
-            <OptionComponent text={"hamburger"}/>
-            <OptionComponent text={"Pizzas"}/>
-            <OptionComponent text={"Complementos"}/>
-            <OptionComponent text={"Sobrimesas"}/>
-            <OptionComponent text={"Bebidas"}/>
-          </NavComponent>
-          <ShoppingCartComponent/>
-        </NavigationComponent>
-      </HeaderComponent>
+      <Header.Root>
+        <Header.Image dataLogo={dataLogo}/>
+        <Header.Navigation>
+          <Header.Nav>
+            <Header.Option text="Hamburguer"/>
+            <Header.Option text="Pizza"/>
+            <Header.Option text="Complementos"/>
+            <Header.Option text="Sobrimesas"/>
+            <Header.Option text="Bebidas"/>
+          </Header.Nav>
+          <Header.Cart/>
+        </Header.Navigation>
+      </Header.Root>
 
       <Search filterItemsData={filterItemsData} itemNomeRef={itemNameRef} />
             
@@ -121,7 +116,7 @@ export default function Home() {
         </>
       )}
 
-      <FooterComponent/>
+      <FooterComponent />
     </>
   );
 }

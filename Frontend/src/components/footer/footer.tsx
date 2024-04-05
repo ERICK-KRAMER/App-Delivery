@@ -2,7 +2,7 @@ import { FaFacebookF, FaWhatsapp, FaInstagram } from "react-icons/fa";
 
 const FooterComponent = () => {
   return(
-    <footer className="bg-slate-800 p-8 text-white max-[800px]:mb-14">
+    <footer className="bg-slate-800 p-6 text-white max-[800px]:mb-14">
       <div className="grid grid-cols-3 gap-4 mb-6">
         <div className="flex flex-col items-center">
           <img src="" alt="name" />
@@ -48,7 +48,7 @@ const FooterComponent = () => {
             </div>
           </div>
         </div>
-        <div className=" bg-white text-black p-4 rounded-md w-[420px]">
+        <div className=" bg-white text-black p-4 rounded-md w-[420px] max-[480px]:w-[400px]">
           <h3 className="text-center font-bold text-2xl">Horario de Funcionamento</h3>
           <ul className="font-semibold">
             <li>DOM: Fechado</li>
