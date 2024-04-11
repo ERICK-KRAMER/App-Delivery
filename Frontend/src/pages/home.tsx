@@ -2,18 +2,19 @@ import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../api/products";
 import { LoadingCircle } from "../components/loading";
 import { IProducts, ProductsPops } from "../types/Products";
-import FooterComponent from "../components/footer/footer";
-import ItemComponent from "../components/items/itemCompoenet1";
-import Complements from "../components/complements";
-import ItemComponent2 from "../components/items/itemComponent2";
-import SaleComponent from "../components/sale";
+import { Footer } from "../components/footer";
 import Search from "../components/search";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useContext } from "react";
 import TopBar from "../components/topbar";
-import Toolbar from "../components/toolbar";
+import { Toolbar } from "../components/toolbar/inedx";
 import ModalComponent from "../components/modal/modal";
 import Item from "../components/modal/item";
 import { Header } from "../components/Header";
+import { Wrapper } from "../components/Container";
+import { Itens } from "../components/items";
+import { LogOut, Menu, ShoppingCart, User } from "lucide-react";
+import { loginContext } from "../context/userLogin";
+import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa";
 
 export default function Home() {
   
@@ -23,6 +24,7 @@ export default function Home() {
   const [targetItem, setTargetItem] = useState<ProductsPops | undefined>();
   const { data, error, isLoading } = useQuery<IProducts>({ queryKey: ['products'], queryFn: getProducts });
   const [showToolbar, setShowToolbar] = useState<boolean>(false);
+  const context = useContext(loginContext);
 
   useEffect(() => {
     const handleResize = () => {
@@ -57,15 +59,18 @@ export default function Home() {
     }
   };
 
-
   const dataLogo = {
     name: "LogoImage",
     url: "https://painel.zeppy.com.br/storage/1/shops/1/34fa7815-logo-burguer.png"
   }
 
+  const handleLogout = () => {
+    sessionStorage.clear();
+    window.location.reload();
+  }
+
   return (
     <>
-
       <TopBar/>
 
       <Header.Root>
@@ -86,37 +91,101 @@ export default function Home() {
             
       {isOpen && targetItem && <ModalComponent isOpen={isOpen} setIsOpen={setIsOpen} children={<Item values={targetItem} />} />}
 
-      {showToolbar && ( <Toolbar /> )}
+      {showToolbar && ( 
+         <Toolbar.Root>
+          <Toolbar.Option text="Entrar" icon={ Menu }/>
+          <Toolbar.Option text={ context ? context.data?.name : "Inicio" } icon={ context ? LogOut : User } onClick={ handleLogout } />
+          <Toolbar.Option text="0,00" icon={ ShoppingCart }/>
+         </Toolbar.Root>
+      )}
       
       {filterItems.length > 0 ? (
-        <Complements title={"Filtrados"}>
-          {filterItems.map(values => <ItemComponent2 values={values} key={values._id} setIsOpen={setIsOpen} setTargetItem={setTargetItem} />)}
-        </Complements>
+        <Wrapper.Complements title={"Filtrados"}>
+          {filterItems.map(values => 
+            <Itens.Itens2
+            values={values} 
+            key={values._id} 
+            setIsOpen={setIsOpen} 
+            setTargetItem={setTargetItem} 
+          />)}
+        </Wrapper.Complements>
       ) : (
         <>
-          <SaleComponent>
-            {data && data.map(values => <ItemComponent values={values} key={values._id} setIsOpen={setIsOpen} setTargetItem={setTargetItem}/>)}
-          </SaleComponent>
+          <Wrapper.Sale>
+            {data && data.map(values => 
+              <Itens.Itens1
+                values={values} 
+                key={values._id} 
+                setIsOpen={setIsOpen}
+                setTargetItem={setTargetItem}
+              />)}
+          </Wrapper.Sale>
 
-          <Complements title={"Hambúrgeres"} description={"Os melhores hambúrgueres de Recife"}>
-            {data && hamburgueres.map(values => <ItemComponent2 values={values} key={values._id}setIsOpen={setIsOpen} setTargetItem={setTargetItem} />)}
-          </Complements>
+          <Wrapper.Complements title={"Hambúrgeres"} description={"Os melhores hambúrgueres de Recife"}>
+            {data && hamburgueres.map(values =>
+              <Itens.Itens2 
+              values={values}
+              key={values._id} 
+              setIsOpen={setIsOpen}
+              setTargetItem={setTargetItem} 
+            />)}
+          </Wrapper.Complements>
 
-          <Complements title={"Complementos"} description={"Acompanhamentos para ninguém botar defeito!"}>
-            {data && complementos.map(values => <ItemComponent2 values={values} key={values._id} setIsOpen={setIsOpen} setTargetItem={setTargetItem}/>)}
-          </Complements>
+          <Wrapper.Complements title={"Complementos"} description={"Acompanhamentos para ninguém botar defeito!"}>
+            {data && complementos.map(values => 
+              <Itens.Itens2 
+              values={values} 
+              key={values._id} 
+              setIsOpen={setIsOpen} 
+              setTargetItem={setTargetItem}
+            />)}
+          </Wrapper.Complements>
 
-          <Complements title={"Sobremesas"}>
-            {data && sobremesa.map(values => <ItemComponent2 values={values} key={values._id} setIsOpen={setIsOpen} setTargetItem={setTargetItem}/>)}
-          </Complements>
+          <Wrapper.Complements title={"Sobremesas"}>
+            {data && sobremesa.map(values => 
+              <Itens.Itens2 
+              values={values} 
+              key={values._id} 
+              setIsOpen={setIsOpen} 
+              setTargetItem={setTargetItem}
+            />)}
+          </Wrapper.Complements>
 
-          <Complements title={"Bebidas"}>
-            {data && bebidas.map(values => <ItemComponent2 values={values} key={values._id} setIsOpen={setIsOpen} setTargetItem={setTargetItem}/>)}
-          </Complements>
+          <Wrapper.Complements title={"Bebidas"}>
+            {data && bebidas.map(values => 
+              <Itens.Itens2 
+              values={values} 
+              key={values._id} 
+              setIsOpen={setIsOpen} 
+              setTargetItem={setTargetItem}
+            />)}
+          </Wrapper.Complements>
         </>
       )}
 
-      <FooterComponent />
+      <Footer.Root>
+        <Footer.About data={dataLogo}/>
+        <Footer.Category title="Category">
+          <Footer.Option text="Hambúrgueres"/>
+          <Footer.Option text="Pizzas"/>
+          <Footer.Option text="Complementos"/>
+          <Footer.Option text="Sobremesas"/>
+          <Footer.Option text="Bebidas"/>
+        </Footer.Category>
+        <Footer.Category title="Pages">
+          <Footer.Option text="Contato"/>
+          <Footer.Option text="Sobre"/>
+          <Footer.Option text="Política de Privacidade"/>
+          <Footer.Option text="Termos de Uso"/>
+          <Footer.Option text="Trocas"/>
+        </Footer.Category>
+        <Footer.SocialNetworks>
+          <Footer.SocialNetwork icon={FaFacebookF}/>
+          <Footer.SocialNetwork icon={FaInstagram}/>
+          <Footer.SocialNetwork icon={FaWhatsapp}/>
+        </Footer.SocialNetworks>
+     </Footer.Root>
+
     </>
   );
 }

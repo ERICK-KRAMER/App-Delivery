@@ -19,10 +19,14 @@ const TopBar = () => {
             <span>Whatsapp</span>
           </li>
         </ul>
-        <Link to={"/login"} className=" flex justify-center items-center cursor-pointer gap-1 hover:text-red-500 duration-500 transition-colors">
-          <User/>
-          <span>{context.data ? context.data.name : "entrar"}</span>
-        </Link>
+        <div className="flex gap-5">
+          <span>{context.data ? context.data.name : null}</span>
+          {context.data ? <button onClick={() => {sessionStorage.clear(), window.location.reload()}}>Logout</button> : 
+          <Link to={"/login"} className=" flex justify-center items-center cursor-pointer gap-1 hover:text-red-500 duration-500 transition-colors">
+            <User/>
+            <span>{context.data ? context.data.name : "entrar"}</span>
+          </Link>}
+        </div>
       </nav>
     </div>
   )
