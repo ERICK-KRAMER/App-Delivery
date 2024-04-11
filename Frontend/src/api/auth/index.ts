@@ -1,4 +1,4 @@
-import { IUser } from "../../types/User";
+import { IDataLogin } from "../../types/User";
 
 const endpoint = "http://localhost:4000/login";
 
@@ -7,7 +7,7 @@ interface IAuth {
   password: string;
 }
 
-export const Login = async ({ email, password }: IAuth): Promise<IUser | null> => {
+export const Login = async ({ email, password }: IAuth): Promise<IDataLogin | null> => {
   try {
     const response = await fetch(endpoint, {
       method: 'POST',

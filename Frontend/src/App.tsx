@@ -32,7 +32,8 @@ export default function App() {
       <loginContext.Provider value={{ data }}>
         <Routes>
           <Route path="/" element={<Home /> } />
-          <Route path="/login" element={data?.token ? <Navigate to={"/"}/> : <FormComponent handleSubmit={handleSubmit} />} />
+          <Route path="/login" 
+            element={data?.token ? <Navigate to={"/"}/> : <FormComponent handleSubmit={handleSubmit} />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </loginContext.Provider>
