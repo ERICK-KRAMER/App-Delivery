@@ -18,37 +18,24 @@ Este é um aplicativo de delivery desenvolvido com React no frontend e Node.js (
 
 ### Backend
 
-1. Clone o repositório.
+1. Clone o repositório:  git clone <https://github.com/ERICK-KRAMER/App-Delivery>
 
-git clone <URL_DO_REPOSITORIO>
+2. Navegue até o diretório do backend:  cd backend
 
-2. Navegue até o diretório do backend:
-
-cd backend
-
-3. Instale as dependências:
-
-npm install
+3. Instale as dependências:  npm install
 
 4. Configure as variáveis de ambiente no arquivo `.env`.
 
-5. Inicie o servidor:
-
-npm start
-
+5. Inicie o servidor: npm start
 
 ### Frontend
 
 1. Navegue até o diretório do frontend:
 cd frontend
 
-2. Instale as dependências:
+2. Instale as dependências:  npm install
 
-npm install
-
-3. Inicie o aplicativo:
-
-npm start
+3. Inicie o aplicativo: npm start
 
 
 ## Tecnologias Utilizadas
