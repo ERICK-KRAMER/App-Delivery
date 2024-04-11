@@ -180,9 +180,9 @@ export default function Home() {
           <Footer.Option text="Trocas"/>
         </Footer.Category>
         <Footer.SocialNetworks>
-          <Footer.SocialNetwork icon={FaFacebookF}/>
-          <Footer.SocialNetwork icon={FaInstagram}/>
-          <Footer.SocialNetwork icon={FaWhatsapp}/>
+          <Footer.SocialNetwork icon={FaFacebookF} className="hover:text-blue-500"/>
+          <Footer.SocialNetwork icon={FaInstagram} className="hover:text-green-500"/>
+          <Footer.SocialNetwork icon={FaWhatsapp} className="hover:text-violet-500"/>
         </Footer.SocialNetworks>
       </Footer.Root>
 
