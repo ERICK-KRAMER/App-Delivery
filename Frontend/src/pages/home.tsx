@@ -184,7 +184,7 @@ export default function Home() {
           <Footer.SocialNetwork icon={FaInstagram}/>
           <Footer.SocialNetwork icon={FaWhatsapp}/>
         </Footer.SocialNetworks>
-     </Footer.Root>
+      </Footer.Root>
 
     </>
   );
